@@ -30,11 +30,18 @@ esac
 echo $workhrs
 }
 
+function dailywage(){
+local workhrs=$1
+wage=$(($workhrs*$WAGEPERHOUR))
+echo $wage
+}
+
 while [[ $totalEmployeeHours -lt $minworkhours && $totalworkingdays -lt $numWorkingDays ]]
 do
    ((totalworkingdays++))
    workhrs="$( workhours $((RANDOM%3)) )"
    totalEmployeeHours=$(($totalEmployeeHours+$workhrs))
+   empdailywage[$totalworkingdays]="$(dailywage $workhrs)"
 done
 totalSalary=$(($totalEmployeeHours*$WAGEPERHOUR))
-
+echo "DailyWage"${empdailywage[@]}
