@@ -1,4 +1,11 @@
 #!/bin/bash -x
+
+FULLWORKDAYHOUR=8
+WAGEPERHOUR=20
+ISFULLTIME=1
+ISPARTTIME=0
+PARTTIMEWORKHOUR=4
+
 echo "Welcome to EmployeeWage Computation Program"
 EmployeeCheck=$((RANDOM%2))
 if [ $EmployeeCheck -eq 0 ]
@@ -7,23 +14,22 @@ then
 else
 	echo Employee Is Absent
 fi
-WAGEPERHOUR=20
-FULLWORKDAYHOUR=8
 DailyEmployeeWage=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
-PARTTIMEWORKHOUR=4
+
 DailyWageforPartTime=$(($WAGEPERHOUR*$PARTTIMEWORKHOUR))
-ISFULLTIME=1
-ISPARTTIME=0
+
 case  $EmployeeCheck in $ISFULLTIME)
-echo "FULL TIME EMPLOYEE"
-Salary=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
+	echo "FULL TIME EMPLOYEE"
+	Salary=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
+	Monthpay=$((20*$Salary))
 ;;
 $ISPARTTIME)
-echo "PART TIME EMPLOYEE"
-Salary=$(($WAGEPERHOUR*$PARTTIMEWORKHOUR))
+	echo "PART TIME EMPLOYEE"
+	Salary=$(($WAGEPERHOUR*$PARTTIMEWORKHOUR))
+	Monthpay=$((20*$Salary))
 ;;
 *)
-Salary=0
+	Salary=0
 ;;
 esac
 
