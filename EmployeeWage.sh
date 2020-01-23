@@ -12,24 +12,29 @@ numWorkingDays=20
 minworkhours=100
 
 
-while [[ $totalEmployeeHours -lt $minworkhours && $totalworkingdays -lt $numWorkingDays ]]
-do
-((totalworkingdays++))
-employeeCheck=$((RANDOM%3))
+function workhours() {
 
-case $employeeCheck in $ISFULLTIME)
-	
-	workhrs=8
+
+case $1 in $ISFULLTIME)
+   
+   workhrs=8
 ;;
 $ISPARTTIME)
-	
-	workhrs=4
+   
+   workhrs=4
 ;;
 *)
-	workhrs=0
+   workhrs=0
 ;;
 esac
-totalEmployeeHours=$(($totalEmployeeHours+$workhrs))
+echo $workhrs
+}
+
+while [[ $totalEmployeeHours -lt $minworkhours && $totalworkingdays -lt $numWorkingDays ]]
+do
+   ((totalworkingdays++))
+   workhrs="$( workhours $((RANDOM%3)) )"
+   totalEmployeeHours=$(($totalEmployeeHours+$workhrs))
 done
 totalSalary=$(($totalEmployeeHours*$WAGEPERHOUR))
 
