@@ -7,4 +7,6 @@ echo Employee Is Present
 else
 echo Employee Is Absent
 fi
-
+WAGEPERHOUR=20
+FULLWORKDAYHOUR=8
+DailyEmployeeWage=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
