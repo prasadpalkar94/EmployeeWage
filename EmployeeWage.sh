@@ -3,11 +3,11 @@
 FULLWORKDAYHOUR=8
 WAGEPERHOUR=20
 ISFULLTIME=1
-ISPARTTIME=0
+ISPARTTIME=2
 PARTTIMEWORKHOUR=4
 
 echo "Welcome to EmployeeWage Computation Program"
-EmployeeCheck=$((RANDOM%2))
+EmployeeCheck=$((RANDOM%3))
 if [ $EmployeeCheck -eq 0 ]
 then 
 	echo Employee Is Present
