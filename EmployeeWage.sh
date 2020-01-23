@@ -6,30 +6,35 @@ ISFULLTIME=1
 ISPARTTIME=2
 PARTTIMEWORKHOUR=4
 
-echo "Welcome to EmployeeWage Computation Program"
-EmployeeCheck=$((RANDOM%3))
-if [ $EmployeeCheck -eq 0 ]
-then 
-	echo Employee Is Present
-else
-	echo Employee Is Absent
-fi
-DailyEmployeeWage=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
+totalEmployeeHours=0
+totalworkingdays=0
+numWorkingDays=20
+minworkhours=100
 
-DailyWageforPartTime=$(($WAGEPERHOUR*$PARTTIMEWORKHOUR))
 
-case  $EmployeeCheck in $ISFULLTIME)
-	echo "FULL TIME EMPLOYEE"
-	Salary=$(($WAGEPERHOUR*$FULLWORKDAYHOUR))
-	Monthpay=$((20*$Salary))
+function workhours() {
+
+
+case $1 in $ISFULLTIME)
+	
+	workhrs=8
 ;;
 $ISPARTTIME)
-	echo "PART TIME EMPLOYEE"
-	Salary=$(($WAGEPERHOUR*$PARTTIMEWORKHOUR))
-	Monthpay=$((20*$Salary))
+	
+	workhrs=4
 ;;
 *)
-	Salary=0
+	workhrs=0
 ;;
 esac
+echo $workhrs
+}
+
+while [[ $totalEmployeeHours -lt $minworkhours && $totalworkingdays -lt $numWorkingDays ]]
+do
+   ((totalworkingdays++))
+   workhrs="$( workhours $((RANDOM%3)) )"
+   totalEmployeeHours=$(($totalEmployeeHours+$workhrs))
+done
+totalSalary=$(($totalEmployeeHours*$WAGEPERHOUR))
 
