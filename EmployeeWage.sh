@@ -11,6 +11,7 @@ totalworkingdays=0
 numWorkingDays=20
 minworkhours=100
 
+declare -A empdailywage
 
 function workhours() {
 
@@ -41,7 +42,9 @@ do
    ((totalworkingdays++))
    workhrs="$( workhours $((RANDOM%3)) )"
    totalEmployeeHours=$(($totalEmployeeHours+$workhrs))
-   empdailywage[$totalworkingdays]="$(dailywage $workhrs)"
+   empdailywage[Day"$totalworkingdays"]="$(dailywage $workhrs)"
 done
 totalSalary=$(($totalEmployeeHours*$WAGEPERHOUR))
 echo "DailyWage"${empdailywage[@]}
+echo ${!empdailywage[@]}
+
