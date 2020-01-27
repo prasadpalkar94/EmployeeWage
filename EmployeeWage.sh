@@ -13,28 +13,26 @@ minworkhours=100
 
 declare -A empdailywage
 
-function workhours() {
+function workhours()
+	{
+		case $1 in $ISFULLTIME)
+   	workhrs=8
+		;;
+		$ISPARTTIME)
+   	workhrs=4
+		;;
+		*)
+   	workhrs=0
+		;;
+		esac
+		echo $workhrs
+	}
 
-
-case $1 in $ISFULLTIME)
-   
-   workhrs=8
-;;
-$ISPARTTIME)
-   
-   workhrs=4
-;;
-*)
-   workhrs=0
-;;
-esac
-echo $workhrs
-}
-
-function dailywage(){
-local workhrs=$1
-wage=$(($workhrs*$WAGEPERHOUR))
-echo $wage
+function dailywage()
+{
+	local workhrs=$1
+	dailywage=$(($workhrs*$WAGEPERHOUR))
+	echo $dailywage
 }
 
 while [[ $totalEmployeeHours -lt $minworkhours && $totalworkingdays -lt $numWorkingDays ]]
